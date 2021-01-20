@@ -2,7 +2,7 @@
 
 MYSQL_CONFIG=$1
 MYSQL_PW=$2
-MYSQL_USER=admin
+MYSQL_USER=root
 
 printf "${MYSQL_PW}\n" |ectool runProcedure /plugins/EC-MYSQL/project \
 	--procedureName CreateConfiguration \

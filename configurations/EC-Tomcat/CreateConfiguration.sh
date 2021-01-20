@@ -3,7 +3,7 @@
 TOMCAT_CONFIG=$1
 TOMCAT_PW=$2
 TOMCAT_URL=$3
-TOMCAT_USER=admin
+TOMCAT_USER=tomcat
 
 printf "${TOMCAT_PW}\n" |ectool runProcedure /plugins/EC-Tomcat/project \
 	--procedureName CreateConfiguration \
