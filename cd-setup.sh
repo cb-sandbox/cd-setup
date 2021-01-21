@@ -7,7 +7,8 @@
 #	[] tomcat URLs
 # [] Debug EC-Kubernetes
 
-TOMCAT_MYSQL_PW=LM9pB9Jz
+#TOMCAT_MYSQL_PW=LM9pB9Jz
+TOMCAT_MYSQL_PW=flow
 
 echo "Logging into cd.${BASE_DOMAIN}"
 ectool --server "cd.${BASE_DOMAIN}" login admin "$CD_ADMIN_PASS"
