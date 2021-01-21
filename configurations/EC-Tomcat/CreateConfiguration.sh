@@ -12,7 +12,6 @@ printf "${TOMCAT_PW}\n" |ectool runProcedure /plugins/EC-Tomcat/project \
 	--actualParameter \
         tomcat_home=/opt/tomcat/latest \
         tomcat_url="${TOMCAT_URL}" \
-        tomcat_url="http://localhost:8080" \
         config="${TOMCAT_CONFIG}" \
         credential="${TOMCAT_CONFIG}" \
 	--credential "${TOMCAT_CONFIG}"="${TOMCAT_USER}"
