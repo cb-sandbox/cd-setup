@@ -7,7 +7,7 @@
 #	[x] tomcat URLs
 # [] Debug EC-Kubernetes
 # [] Set /server/hostName when CEV-27062 is resolved
-# [] Open ACLs for /server Everyone
+# [x] Open ACLs for /server Everyone
 
 
 #TOMCAT_MYSQL_PW=LM9pB9Jz
