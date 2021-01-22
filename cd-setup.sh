@@ -7,6 +7,7 @@
 #	[] tomcat URLs
 # [] Debug EC-Kubernetes
 
+
 #TOMCAT_MYSQL_PW=LM9pB9Jz
 TOMCAT_MYSQL_PW=flow
 
