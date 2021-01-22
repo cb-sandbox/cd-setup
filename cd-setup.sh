@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
 
 # TODO
-# [] pass Tomcat and MySQL parameters
-#	[] IP addresses for resources
-#	[] passwords
-#	[] tomcat URLs
+# [x] pass Tomcat and MySQL parameters
+#	[x] IP addresses for resources
+#	[x] passwords
+#	[x] tomcat URLs
 # [] Debug EC-Kubernetes
+# [] Set /server/hostName when CEV-27062 is resolved
+# [] Open ACLs for /server Everyone
 
 
 #TOMCAT_MYSQL_PW=LM9pB9Jz
@@ -14,8 +16,12 @@ TOMCAT_MYSQL_PW=flow
 echo "Logging into cd.${BASE_DOMAIN}"
 ectool --server "cd.${BASE_DOMAIN}" login admin "$CD_ADMIN_PASS"
 
-echo "Set CD server hostname"
-ectool setProperty /server/hostName "cd.${BASE_DOMAIN}"
+echo "Opening up privileges for all users"
+ectool evalDsl "aclEntry principalType: 'group', principalName: 'Everyone', objectType: 'server', systemObjectName: 'server', readPrivilege: 'allow',modifyPrivilege: 'allow', changePermissionsPrivilege: 'allow', executePrivilege: 'allow'"
+
+# The following is blocked by https://cloudbees.atlassian.net/browse/CEV-27062, has to be done manually
+#echo "Set CD server hostname"
+#ectool setProperty /server/hostName "cd.${BASE_DOMAIN}"
 echo "Set CD repository hostName"
 ectool setProperty /repositories/Default/url "https://cd.${BASE_DOMAIN}:8200"
 
