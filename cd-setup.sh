@@ -32,11 +32,19 @@ ectool createResource tomcat_mysql_uat --hostName $CD_AGENT_TOMCAT_UAT_IP
 
 echo "Creating EC-Kubernetes configuration"
 configurations/EC-Kubernetes/CreateConfiguration.sh "$CLUSTER_ENDPOINT" "$CLUSTER_NAME"
+
+# echo "Installing EC-Tomcat"
+ectool installPlugin http://downloads.electric-cloud.com/plugins/EC-Tomcat/2.3.6.2020103102/EC-Tomcat.jar
+ectool promotePlugin EC-Tomcat-2.3.6.2020103102 --promoted 1
 echo "Creating tomcat_qa configuration"
 configurations/EC-Tomcat/CreateConfiguration.sh tomcat_qa $TOMCAT_MYSQL_PW "http://${CD_AGENT_TOMCAT_QA_IP}:8080"
 echo "Creating tomcat_uat configuration"
 configurations/EC-Tomcat/CreateConfiguration.sh tomcat_uat $TOMCAT_MYSQL_PW "http://${CD_AGENT_TOMCAT_UAT_IP}:8080"
 echo "Creating mysql_qa configuration"
+
+# echo "Installing EC-MYSQL"
+ectool installPlugin http://downloads.electric-cloud.com/plugins/EC-MYSQL/2.0.13.2020102201/EC-MYSQL.jar
+ectool promotePlugin EC-MYSQL-2.0.13.2020102201 --promoted 1
 configurations/EC-MYSQL/CreateConfiguration.sh mysql_qa $TOMCAT_MYSQL_PW
 echo "Creating mysql_qa configuration"
 configurations/EC-MYSQL/CreateConfiguration.sh mysql_uat $TOMCAT_MYSQL_PW
