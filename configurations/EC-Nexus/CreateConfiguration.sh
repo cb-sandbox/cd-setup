@@ -10,7 +10,7 @@ NEXUS_USER="admin"
 printf "${NEXUS_PW}\n" | ectool runProcedure /plugins/EC-Nexus/project \
   --procedureName CreateConfiguration \
   --actualParameter \
-  instance="${NEXUS_URL}" \
-  config="${NEXUS_CONFIG}" \
-  credential="${NEXUS_CONFIG}" \
+      instance="${NEXUS_URL}" \
+      config="${NEXUS_CONFIG}" \
+      credential="${NEXUS_CONFIG}" \
   --credential "${NEXUS_CONFIG}"="${NEXUS_USER}"
