@@ -40,14 +40,20 @@ if [ "$TF_VAR_agent_enabled" ]; then
   configurations/EC-Tomcat/CreateConfiguration.sh tomcat_qa $TOMCAT_MYSQL_PW "http://${CD_AGENT_TOMCAT_QA_IP}:8080"
   echo "Creating tomcat_uat configuration"
   configurations/EC-Tomcat/CreateConfiguration.sh tomcat_uat $TOMCAT_MYSQL_PW "http://${CD_AGENT_TOMCAT_UAT_IP}:8080"
-  echo "Creating mysql_qa configuration"
 
   echo "Installing EC-MYSQL"
   ectool installPlugin http://downloads.electric-cloud.com/plugins/EC-MYSQL/2.0.13.2020102201/EC-MYSQL.jar
   ectool promotePlugin EC-MYSQL-2.0.13.2020102201 --promoted 1
-  configurations/EC-MYSQL/CreateConfiguration.sh mysql_qa $TOMCAT_MYSQL_PW
   echo "Creating mysql_qa configuration"
+  configurations/EC-MYSQL/CreateConfiguration.sh mysql_qa $TOMCAT_MYSQL_PW
+  echo "Creating mysql_uat configuration"
   configurations/EC-MYSQL/CreateConfiguration.sh mysql_uat $TOMCAT_MYSQL_PW
+  
+  echo "Installing EC-Helm"
+  ectool installPlugin http://downloads.electric-cloud.com/plugins/EC-Helm/1.1.1.2020101501/EC-Helm.jar
+  ectool promotePlugin EC-Helm-1.1.1.2020101501 --promoted 1
+  echo "Creating EC-Helm configuration"
+  configurations/EC-Helm/CreateConfiguration.sh Helm
 fi
 
 if [ "$NEXUS_ENABLED" ]; then
