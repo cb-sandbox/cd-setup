@@ -54,6 +54,9 @@ if [ "$TF_VAR_agent_enabled" ]; then
   ectool promotePlugin EC-Helm-1.1.1.2020101501 --promoted 1
   echo "Creating EC-Helm configuration"
   configurations/EC-Helm/CreateConfiguration.sh Helm
+  
+  ectool evalDsl --dslFile "dsl/Helm Deploy/Helm.groovy"
+  ectool evalDsl --dslFile "dsl/Helm Deploy/HelmAppEnvModels.groovy"  --parameters "{\"base_domain\":\"${BASE_DOMAIN}\"}"
 fi
 
 if [ "$NEXUS_ENABLED" ]; then

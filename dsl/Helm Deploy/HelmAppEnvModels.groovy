@@ -17,20 +17,24 @@ TODO
 
 */
 
+def kubectl = "/home/cbflow/google-cloud-sdk/bin/kubectl"
+def HelmHostName = getResource(resourceName: "k8s-agent").hostName
+def base_domain = args.base_domain
+
 def Project = 'HelmDeploy'
 def AppName = "RSS"
 def BaseNamespace = AppName.toLowerCase()
 def Chart = 'halkeye/freshrss'
 def Release = 'freshrss'
-
-//def HelmHostName = 'agent-flow-agents'
-def HelmHostName = 'kubectl-agent-flow-agents'
+def Envs = ["QA", "UAT"]
 
 project Project,{
-	environment 'qa',{
-		namespace = "${BaseNamespace}-${environmentName}"
-		environmentTier 'App Tier',{
-			resource "${projectName}_${environmentName}_App Tier", hostName: HelmHostName
+	Envs.each { Env ->
+		environment Env,{
+			namespace = "${BaseNamespace}-${environmentName}".toLowerCase()
+			environmentTier 'App Tier',{
+				resource "${projectName}_${environmentName}_App Tier", hostName: HelmHostName
+			}
 		}
 	}
 	application AppName, {
@@ -84,19 +88,28 @@ project Project,{
 						actualParameter = [
 							'chart': Chart,
 							'config': 'Helm',
-							'options': '''\
+							'options': """\
 								--install
-								-n=$[/myEnvironment/namespace]
+								-n=\$[/myEnvironment/namespace]
 								--create-namespace
 								--set=ingress.enabled=true
-								--set=ingress.hosts[0]=$[/myEnvironment/namespace].cb-demos.io
-							'''.stripIndent(),
+								--set=ingress.hosts[0]=\$[/myEnvironment/namespace].${base_domain}
+							""".stripIndent(),
 							'releaseName': Release,
 							'resultPropertySheet': '/myJob/upgradeRelease',
 						]
 						processStepType = 'plugin'
 						subprocedure = 'Upgrade Release'
 						subproject = '/plugins/EC-Helm/project'
+					}
+					processStep 'Create Application Link', {
+						actualParameter = [
+							'commandToRun': 'ectool setProperty /myJob/report-urls/Application \'$[/javascript myJob.upgradeRelease.match("http.*")]\'',
+						]
+						applicationTierName = null
+							processStepType = 'command'
+							subprocedure = 'RunCommand'
+							subproject = '/plugins/EC-Core/project'
 					}
 					processStep 'Helm rollback', {
 						actualParameter = [
@@ -110,11 +123,14 @@ project Project,{
 						subprocedure = 'Rollback Release'
 						subproject = '/plugins/EC-Helm/project'
 					}
+					processDependency 'Create Application Link', targetProcessStepName: 'Helm rollback', {
+						branchType = 'ERROR'
+					}
 					processDependency 'Create Artifact Placeholder', targetProcessStepName: 'Helm fetch', {
 						branchType = 'ALWAYS'
 					}
-					processDependency 'Helm Install', targetProcessStepName: 'Helm rollback', {
-						branchType = 'ERROR'
+					processDependency 'Helm Install', targetProcessStepName: 'Create Application Link', {
+						branchType = 'ALWAYS'
 					}
 					processDependency 'Helm fetch', targetProcessStepName: 'Helm repo update', {
 						branchType = 'ALWAYS'
@@ -163,12 +179,14 @@ project Project,{
 				subcomponentProcess = 'Uninstall'
 			}
 		}
-		tierMap 'qa', {
-			environmentName = 'qa'
-			environmentProjectName = projectName
-			tierMapping 'App Tier_qa', {
-				applicationTierName = 'App Tier'
-				environmentTierName = 'App Tier'
+		Envs.each { Env ->
+			tierMap Env, {
+				environmentName = Env
+				environmentProjectName = projectName
+				tierMapping "App Tier_${Env}", {
+					applicationTierName = 'App Tier'
+					environmentTierName = 'App Tier'
+				}
 			}
 		}
 	}

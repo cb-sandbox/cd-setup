@@ -21,8 +21,6 @@ TODO
 
 */
 
-def kubectl = '/home/cbflow/google-cloud-sdk/bin/kubectl'
-
 project "Helm",{
 	procedure "Push inventory",{
 		step "Get Chart and Application Versions", shell: "ec-groovy", condition: true, command: '''\
@@ -44,13 +42,13 @@ project "Helm",{
 			println "Creating Deployment property: ${object[0].name}"
 			ef.setProperty propertyName: "/myJob/Deployment", value: object[0].name
 		'''.stripIndent()
-		step "Get Component Versions", shell: "ec-groovy '{0}' ${kubectl}", command: '''\
+		step "Get Component Versions", shell: "ec-groovy '{0}'", command: '''\
 			import groovy.json.JsonSlurper
 			import groovy.json.JsonOutput
 			import com.electriccloud.client.groovy.ElectricFlow
 			ElectricFlow ef = new ElectricFlow()
 			def sout = new StringBuilder(), serr = new StringBuilder()
-			def proc = [this.args[0],'get', 'deployment', '$[/myJob/Deployment]', '-n', '$[/myEnvironment/namespace]', '-o', 'json'].execute()
+			def proc = ['kubectl','get', 'deployment', '$[/myJob/Deployment]', '-n', '$[/myEnvironment/namespace]', '-o', 'json'].execute()
 			proc.consumeProcessOutput(sout, serr)
 			proc.waitForOrKill(60000) // Give enough time for the shell command to return
 			println "out> $sout err> $serr"
