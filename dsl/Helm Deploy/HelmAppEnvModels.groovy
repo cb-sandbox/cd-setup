@@ -18,7 +18,8 @@ TODO
 */
 
 def kubectl = "/home/cbflow/google-cloud-sdk/bin/kubectl"
-def HelmHostName = getResource(resourceName: "k8s-agent").hostName
+//def HelmHostName = getResource(resourceName: "k8s-agent").hostName
+def HelmHostName = "agent-flow-agent-0.agent-flow-agents.cloudbees-cd"
 def base_domain = args.base_domain
 
 def Project = 'HelmDeploy'
