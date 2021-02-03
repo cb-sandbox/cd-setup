@@ -16,7 +16,10 @@ if [ "$CD_ENABLED" ]; then	echo "CloudBees CD server setup"
 	echo "Set CD server hostname"
 	ectool setProperty /server/settings/ipAddress "cd.${BASE_DOMAIN}"
 	echo "Set CD repository URL"
+	echo "Delete default repository"
 	ectool deleteRepository default
+	ectool getRepositories
+	echo "Recreate default repository with correct URL"
 	ectool createRepository default --description "Created through automation" --repositoryDisabled false --url "https://cd.${BASE_DOMAIN}:8200"  --zoneName default
 
 	echo "Installing EC-Helm"
