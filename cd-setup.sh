@@ -19,9 +19,10 @@ if [ "$CD_ENABLED" ]; then	echo "CloudBees CD server setup"
 	echo "Delete default repository"
 	ectool deleteRepository default
 	ectool getRepositories
+	sleep 5
 	echo "Recreate default repository with correct URL"
 	ectool createRepository default --description "Created through automation" --repositoryDisabled false --url "https://cd.${BASE_DOMAIN}:8200"  --zoneName default
-
+	ectool getRepositories
 	echo "Installing EC-Helm"
 	ectool installPlugin http://downloads.electric-cloud.com/plugins/EC-Helm/1.1.1.2020101501/EC-Helm.jar
 	ectool promotePlugin EC-Helm-1.1.1.2020101501 --promoted 1
