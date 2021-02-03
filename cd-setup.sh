@@ -5,11 +5,10 @@
 #	[x] IP addresses for resources
 #	[x] passwords
 #	[x] tomcat URLs
-# [] Debug EC-Kubernetes
-# [] Set /server/hostName when CEV-27062 is resolved
+# [] Debug EC-Kubernetes ssl issue
+# [x] Set /server/hostName when CEV-27062 is resolved [use /server/settings/ipAddress]
 # [x] Open ACLs for /server Everyone
 
-#TOMCAT_MYSQL_PW=LM9pB9Jz
 TOMCAT_MYSQL_PW=flow
 
 echo "Logging into cd.${BASE_DOMAIN}"
@@ -18,11 +17,10 @@ ectool --server "cd.${BASE_DOMAIN}" login admin "$CD_ADMIN_PASS"
 echo "Opening up privileges for all users"
 ectool evalDsl "aclEntry principalType: 'group', principalName: 'Everyone', objectType: 'server', systemObjectName: 'server', readPrivilege: 'allow',modifyPrivilege: 'allow', changePermissionsPrivilege: 'allow', executePrivilege: 'allow'"
 
-# The following is blocked by https://cloudbees.atlassian.net/browse/CEV-27062, has to be done manually
-#echo "Set CD server hostname"
-#ectool setProperty /server/hostName "cd.${BASE_DOMAIN}"
-echo "Set CD repository hostName"
-ectool setProperty /repositories/Default/url "https://cd.${BASE_DOMAIN}:8200"
+echo "Set CD server hostname"
+ectool setProperty /server/settings/ipAddress "cd.${BASE_DOMAIN}"
+echo "Set CD repository URL"
+ectool modifyRepository default --url "https://cd.${BASE_DOMAIN}:8200"
 
 echo "Creating EC-Kubernetes configuration"
 configurations/EC-Kubernetes/CreateConfiguration.sh "$CLUSTER_ENDPOINT" "$CLUSTER_NAME"
