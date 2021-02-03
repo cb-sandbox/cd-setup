@@ -23,7 +23,8 @@ if [ true ]; then
 	echo "Set CD server hostname"
 	ectool setProperty /server/settings/ipAddress "cd.${BASE_DOMAIN}"
 	echo "Set CD repository URL"
-	ectool modifyRepository default --url "https://cd.${BASE_DOMAIN}:8200"
+	ectool deleteRepository default
+	ectool createRepository default --description "Created through automation" --repositoryDisabled false --url "https://cd.${BASE_DOMAIN}:8200"  --zoneName default
 
 	echo "Installing EC-Helm"
 	ectool installPlugin http://downloads.electric-cloud.com/plugins/EC-Helm/1.1.1.2020101501/EC-Helm.jar
