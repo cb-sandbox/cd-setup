@@ -93,4 +93,12 @@ if [ "$CD_ENABLED" ]; then
     echo "Creating CB Feature Management configuration"
     configurations/EC-FeatureFlags/CreateConfiguration.sh cbfm "$FM_TOKEN"
   fi
+
+  if [ "$JIRA_ENABLED" ]; then
+    echo "Setting up Jira"
+    ectool installPlugin https://downloads.cloudbees.com/cloudbees-cd/plugins/EC-JIRA/1.8.1.2020123021/EC-JIRA.jar
+    ectool promotePlugin EC-JIRA-1.8.1.2020123021 --promoted 1
+    echo "Creating Jira configuration"
+    configurations/EC-JIRA/CreateConfiguration.sh Jira "$JIRA_USER" "$JIRA_TOKEN" "$JIRA_URL"
+  fi
 fi

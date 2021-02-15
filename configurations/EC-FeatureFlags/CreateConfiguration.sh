@@ -1,6 +1,4 @@
-# Create EC-Nexus configuration
-# TODO:
-# - use IP instead of localhost
+# Create EC-FeatureFlags configuration
 
 FM_CONFIG=$1
 FM_PASS=$2
@@ -11,5 +9,5 @@ printf "${FM_PASS}\n" | ectool runProcedure /plugins/EC-FeatureFlags/project \
   --actualParameter \
       config="${FM_CONFIG}" \
       credential="${FM_CONFIG}" \
-      checkConnection=true \
+      checkConnection=false \
   --credential "${FM_CONFIG}"="${FM_USER}"
