@@ -14,6 +14,6 @@ printf "${ARTIFACTORY_PW}\n" | ectool runProcedure /plugins/EC-Artifactory/proje
       config="${ARTIFACTORY_CONFIG}" \
       credential="${ARTIFACTORY_CONFIG}" \
       proxy_credential="${ARTIFACTORY_CONFIG}" \
-      checkConnection=0 \
+      checkConnection=false \
       debugLevel=0 \
   --credential "${ARTIFACTORY_CONFIG}"="${ARTIFACTORY_USER}"
