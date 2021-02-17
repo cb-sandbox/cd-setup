@@ -8,7 +8,7 @@ ectool runProcedure /plugins/EC-Helm/project \
     config="${HELM_CONFIG}" \
     helmPath=helm \
     helmVersion=3 \
-    checkConnection=0 \
+    checkConnection=false \
     checkConnectionResource=0 \
     createKubeconfig=0 \
     debugLevel=0 \
