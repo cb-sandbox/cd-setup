@@ -10,7 +10,7 @@ printf "${JIRA_PW}\n" | ectool runProcedure /plugins/EC-JIRA/project \
   --actualParameter \
       config="${JIRA_CONFIG}" \
       credential="${JIRA_CONFIG}" \
-      checkConnection=0 \
+      checkConnection=false \
       url="${JIRA_URL}" \
       auth="basic" \
   --credential "${JIRA_CONFIG}"="${JIRA_USER}"
