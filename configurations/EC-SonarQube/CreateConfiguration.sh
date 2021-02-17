@@ -16,5 +16,5 @@ printf "${SONARQUBE_PW}\n" | ectool runProcedure /plugins/EC-SonarQube/project \
       config="${SONARQUBE_CONFIG}" \
       credential="${SONARQUBE_CONFIG}" \
       proxy_credential="${SONARQUBE_CONFIG}" \
-      attemptConnection=0 \
+      attemptConnection=false \
   --credential "${SONARQUBE_CONFIG}"="${SONARQUBE_USER}"
