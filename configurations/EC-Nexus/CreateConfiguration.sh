@@ -14,6 +14,6 @@ printf "${NEXUS_PW}\n" | ectool runProcedure /plugins/EC-Nexus/project \
       config="${NEXUS_CONFIG}" \
       credential="${NEXUS_CONFIG}" \
       proxy_credential="${NEXUS_CONFIG}" \
-      attemptConnection=0 \
+      attemptConnection=false \
       debugLevel=0 \
   --credential "${NEXUS_CONFIG}"="${NEXUS_USER}"
