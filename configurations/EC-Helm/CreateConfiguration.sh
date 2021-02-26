@@ -8,11 +8,11 @@ ectool runProcedure /plugins/EC-Helm/project \
     config="${HELM_CONFIG}" \
     helmPath=helm \
     helmVersion=3 \
-    checkConnection=false \
+    checkConnection=0 \
     checkConnectionResource=0 \
     createKubeconfig=0 \
     debugLevel=0 \
     desc="" \
-    kubeconfigContent="" \
+    kubectlExecutablePath="" \
     kubectlPath=kubectl \
     options=""
