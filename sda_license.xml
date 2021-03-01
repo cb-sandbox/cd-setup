@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<licenses>
+  <license>
+    <customerName>CloudBees_Inc</customerName>
+    <productName>CloudBees CD</productName>
+    <featureName>SDA</featureName>
+    <expirationDate>2022-01-07</expirationDate>
+    <gracePeriod>0</gracePeriod>
+    <properties>
+      <property>
+        <propertyName>editionName</propertyName>
+        <propertyValue>standard</propertyValue>
+      </property>
+      <property>
+        <propertyName>version</propertyName>
+        <propertyValue>1</propertyValue>
+      </property>
+    </properties>
+    <signature>0CbuswriXT04ZRJi90hKBBpZiH5sVCVFr1PBu0KLdsHTTsJaoaqBaonl3QO5TyhVLX7cu1GbhJ+bkEPilfw6H9PfRDqLBYrPJp9noFahQcMKstUl3NibuBLVTJOkkQptZXd+LZAyVHZCaowCB3O0PHpNJCuU2PlFbMWsviVbI27pyDrqUGOZY1iRlWVdweEF2OqCMmyIpaqQH/Nukb8FE08GlIwy1raxk4EWXGE7cVcyDIR6olKO3oCwTxZ65m8GuMbZVNgXJvcl1jY9/5fO/jUomuCyRmXDO9ScWCj6xMEQe89xQcEtSLfFBnnVim0paey6dmVcwHckajjCvMFFoInfp5hQcGho79MCLoHJjxXX3PpkPpGhYoaA7Q8uqGfYISw1d6UO1n2DIQPfmCvvD2EHJdM6v/FhSd1GJTUeFuRStKPd9hdXJ4zcdhTl9r9YwHvM6wwrwMUu+rJbjpaPPwDHTztbJ2qB8qQ6PD2hGVOjjg2zooayxswp/JqDAfHLwcQF5gZbzMXn8glrUvrH5IXw/og77VMMfq+x8gtP434R3ixSjBiL4888L6OnkgOS45sXe6oZg3B3Pd15Zu5AGD9OZeEp8HlcUdh+u70KtssB8xEPC29JWw9Bz+ZUVIWOEIKyNhckmxSXmMAXJixoVqcLmWVjbe5XO9YuAYJ6HHo=</signature>
+  </license>
+</licenses>
