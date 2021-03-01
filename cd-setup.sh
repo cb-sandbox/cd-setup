@@ -34,8 +34,9 @@ if [ "$CD_ENABLED" ]; then
   echo "Creating EC-Helm configuration"
   configurations/EC-Helm/CreateConfiguration.sh Helm
 
-  ectool evalDsl --dslFile "dsl/Helm Deploy/Helm.groovy"
-  ectool evalDsl --dslFile "dsl/Helm Deploy/HelmAppEnvModels.groovy" --parameters "{\"base_domain\":\"${BASE_DOMAIN}\"}"
+  # No longer needed because of new microservice modeling
+  # ectool evalDsl --dslFile "dsl/Helm Deploy/Helm.groovy"
+  # ectool evalDsl --dslFile "dsl/Helm Deploy/HelmAppEnvModels.groovy" --parameters "{\"base_domain\":\"${BASE_DOMAIN}\"}"
 
   echo "Creating EC-Kubernetes configuration"
   configurations/EC-Kubernetes/CreateConfiguration.sh "$CLUSTER_ENDPOINT" "$CLUSTER_NAME"
