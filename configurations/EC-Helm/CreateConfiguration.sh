@@ -6,7 +6,7 @@ ectool runProcedure /plugins/EC-Helm/project \
   --procedureName CreateConfiguration \
   --actualParameter \
     config="${HELM_CONFIG}" \
-    helmPath=helm \
+    helmPath=/usr/sbin/helm \
     helmVersion=3 \
     checkConnection=0 \
     checkConnectionResource=0 \
@@ -14,5 +14,5 @@ ectool runProcedure /plugins/EC-Helm/project \
     debugLevel=0 \
     desc="" \
     kubectlExecutablePath="" \
-    kubectlPath=kubectl \
+    kubectlPath=/usr/local/bin/kubectl \
     options=""
