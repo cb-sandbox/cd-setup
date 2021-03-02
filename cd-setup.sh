@@ -39,7 +39,7 @@ if [ "$CD_ENABLED" ]; then
   # ectool evalDsl --dslFile "dsl/Helm Deploy/Helm.groovy"
   # ectool evalDsl --dslFile "dsl/Helm Deploy/HelmAppEnvModels.groovy" --parameters "{\"base_domain\":\"${BASE_DOMAIN}\"}"
   echo "Create Self-service catalog items, Create Namespace"
-  ectool evalDsl --dslFile "dsl/Kubernetes Project/CreateNamespaceSSC.groovy
+  ectool evalDsl --dslFile "dsl/Kubernetes Project/CreateNamespaceSSC.groovy"
 
   echo "Creating EC-Kubernetes configuration"
   configurations/EC-Kubernetes/CreateConfiguration.sh "$CLUSTER_ENDPOINT" "$CLUSTER_NAME"
@@ -107,6 +107,6 @@ if [ "$CD_ENABLED" ]; then
     ectool installPlugin https://downloads.cloudbees.com/cloudbees-cd/plugins/EC-JIRA/1.8.1.2020123021/EC-JIRA.jar
     ectool promotePlugin EC-JIRA-1.8.1.2020123021 --promoted 1
     echo "Creating Jira configuration"
-    configurations/EC-JIRA/CreateConfiguration.sh Jira "$JIRA_USER" "$JIRA_TOKEN" "$JIRA_URL"
+		configurations/EC-JIRA/CreateConfiguration.sh Jira "$JIRA_USER" "$JIRA_TOKEN" "$JIRA_URL"
   fi
 fi
