@@ -2,7 +2,7 @@
 
 KUBECTL_CONFIG=$1
 
-ectool runProcedure /plugins/EC-Kubectl/project \
+printf "\n" |ectool runProcedure /plugins/EC-Kubectl/project \
   --procedureName CreateConfiguration \
   --actualParameter \
     config="${KUBECTL_CONFIG}" \
@@ -12,6 +12,9 @@ ectool runProcedure /plugins/EC-Kubectl/project \
     kubeconfigCluster= \
     kubeconfigContext= \
     kubeconfigPath= \
-    kubeconfigSource= \
+    kubeconfigSource=kubeconfigDefault \
     kubeconfigUser= \
-    logLevel=INFO
+    logLevel=INFO \
+    credential="${KUBECTL_CONFIG}" \
+  --credential "${KUBECTL_CONFIG}"=""
+  
