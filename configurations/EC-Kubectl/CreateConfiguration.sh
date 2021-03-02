@@ -7,11 +7,11 @@ ectool runProcedure /plugins/EC-Kubectl/project \
   --actualParameter \
     config="${KUBECTL_CONFIG}" \
     kubectlPath=/usr/local/bin/kubectl \
-	additionalOptionsForKubectl= \
-	desc= \
-	kubeconfigCluster= \
-	kubeconfigContext= \
-	kubeconfigPath= \
-	kubeconfigSource= \
-	kubeconfigUser= \
-	logLevel=INFO
+    additionalOptionsForKubectl= \
+    desc= \
+    kubeconfigCluster= \
+    kubeconfigContext= \
+    kubeconfigPath= \
+    kubeconfigSource= \
+    kubeconfigUser= \
+    logLevel=INFO
