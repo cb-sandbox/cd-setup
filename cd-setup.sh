@@ -33,10 +33,13 @@ if [ "$CD_ENABLED" ]; then
   # ectool promotePlugin EC-Helm-1.1.1.2020101501 --promoted 1
   echo "Creating EC-Helm configuration"
   configurations/EC-Helm/CreateConfiguration.sh Helm
-
+  echo "Creating EC-Kubectl configuration"
+  configurations/EC-Kubectl/CreateConfiguration.sh Kubectl
   # No longer needed because of new microservice modeling
   # ectool evalDsl --dslFile "dsl/Helm Deploy/Helm.groovy"
   # ectool evalDsl --dslFile "dsl/Helm Deploy/HelmAppEnvModels.groovy" --parameters "{\"base_domain\":\"${BASE_DOMAIN}\"}"
+  echo "Create Self-service catalog items, Create Namespace"
+  ectool evalDsl --dslFile "dsl/Kubernetes Project/CreateNamespaceSSC.groovy
 
   echo "Creating EC-Kubernetes configuration"
   configurations/EC-Kubernetes/CreateConfiguration.sh "$CLUSTER_ENDPOINT" "$CLUSTER_NAME"
