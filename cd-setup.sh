@@ -17,13 +17,14 @@ if [ "$CD_ENABLED" ]; then
   echo "Set CD server hostname"
   ectool setProperty /server/settings/ipAddress "cd.${BASE_DOMAIN}"
   echo "Set CD repository URL"
-  echo "Delete default repository"
-  ectool deleteRepository default
-  ectool getRepositories
-  sleep 5
-  echo "Recreate default repository with correct URL"
-  ectool createRepository default --description "Created through automation" --repositoryDisabled false --url "https://cd.${BASE_DOMAIN}:8200" --zoneName default
-  ectool getRepositories
+  ectool evalDsl "repository \"default\", url: \"https://cd.${BASE_DOMAIN}:8200\""
+  # echo "Delete default repository"
+  # ectool deleteRepository default
+  # ectool getRepositories
+  # sleep 5
+  # echo "Recreate default repository with correct URL"
+  # ectool createRepository default --description "Created through automation" --repositoryDisabled false --url "https://cd.${BASE_DOMAIN}:8200" --zoneName default
+  # ectool getRepositories
   
   ectool importLicenseData license.xml
   ectool importLicenseData sda_license.xml
